@@ -18,18 +18,24 @@ paddle.draw(ctx);
 let lastTime = 0;
 
 //like the update function in unity
+//"runs each frame"
 function gameLoop(timestamp) {
+  //calculate deltaTime "How much time is passed"
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 
+  //clear the screen each frame to prevent dublicating
   ctx.clearRect(0, 0, 800, 600);
+  //updates the paddle movement
   paddle.update(deltaTime);
+  //draws the paddle in its new position
   paddle.draw(ctx);
 
-  //when the next frame is ready call that gameloop
+  //when the next frame is ready; call that gameloop
   //again and pass it the timestamp
   //calculate the deltaTime and pass it to the uodate function
   requestAnimationFrame(gameLoop);
 }
 
+//call the function
 gameLoop();
