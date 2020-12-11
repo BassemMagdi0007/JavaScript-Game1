@@ -5,7 +5,6 @@ let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext("2d");
 
 const GAME_WIDTH = 800;
-
 const GAME_HEIGHT = 600;
 
 //clear previous position of any shape
@@ -16,13 +15,21 @@ let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
 
 paddle.draw(ctx);
 
-//____________First edit_____________
-/*
-//style the rectangle with reed color '#f00"
-ctx.fillStyle = "#f00";
-//create a rectangle at pos (20,20) with W&H (100,100)
-ctx.fillRect(20, 20, 100, 100);
+let lastTime = 0;
 
-ctx.fillStyle = "#00f";
-ctx.fillRect(200, 200, 50, 50);
-*/
+//like the update function in unity
+function gameLoop(timestamp) {
+  let deltaTime = timestamp - lastTime;
+  lastTime = timestamp;
+
+  ctx.clearRect(0, 0, 800, 600);
+  paddle.update(deltaTime);
+  paddle.draw(ctx);
+
+  //when the next frame is ready call that gameloop
+  //again and pass it the timestamp
+  //calculate the deltaTime and pass it to the uodate function
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
