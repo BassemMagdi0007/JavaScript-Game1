@@ -1,5 +1,6 @@
 import Paddle from "/src/paddle";
 import InputHandler from "/src/input";
+import Ball from "./ball";
 
 let canvas = document.getElementById("gameScreen");
 
@@ -12,27 +13,30 @@ const GAME_HEIGHT = 600;
 //to clear previous actions every frame as the objs move
 ctx.clearRect(0, 0, 800, 600);
 
+let ball = new Ball(GAME_WIDTH, GAME_HEIGHT);
 //instantiate an instance of class Paddle
 let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
-paddle.draw(ctx);
+
 //instantiate the InputHandler
 new InputHandler(paddle);
 
 let lastTime = 0;
 //like the update function in unity
 //"runs each frame"
-
 function gameLoop(timestamp) {
   //calculate deltaTime "How much time is passed"
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 
   //clear the screen each frame to prevent dublicating
-  ctx.clearRect(0, 0, 800, 600);
+  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
   //updates the paddle movement
   paddle.update(deltaTime);
   //draws the paddle in its new position
   paddle.draw(ctx);
+
+  ball.update(deltaTime);
+  ball.draw(ctx);
 
   //when the next frame is ready; call that gameloop
   //again and pass it the timestamp
@@ -41,4 +45,4 @@ function gameLoop(timestamp) {
 }
 
 //call the function
-gameLoop();
+requestAnimationFrame(gameLoop);
