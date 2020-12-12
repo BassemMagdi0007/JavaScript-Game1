@@ -15,9 +15,8 @@ ctx.clearRect(0, 0, 800, 600);
 //instantiate an instance of class Paddle
 let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
 paddle.draw(ctx);
-
 //instantiate the InputHandler
-new InputHandler();
+new InputHandler(paddle);
 
 let lastTime = 0;
 //like the update function in unity
