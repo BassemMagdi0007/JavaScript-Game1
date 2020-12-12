@@ -1,14 +1,21 @@
 export default class Paddle {
+  /* 
+  a constructor enables you to provide any custom initialization 
+  that must be done before any other methods can be called on an instantiated object.
+  */
   constructor(gameWidth, gameHeight) {
+    //didn't need gameHeight since the paddle only move on the x axis hence would collide with the 'width' border
     this.gameWidth = gameWidth;
     //the paddle width
     this.width = 150;
     //the paddle height
     this.height = 20;
-
+    //the max speed of the paddle
     this.maxSpeed = 7;
+    //the current speed of the paddle 'initial speed'
     this.speed = 0;
 
+    //the initial position of the paddle
     this.position = {
       x: gameWidth / 2 - this.width / 2,
       y: gameHeight - this.height - 10
@@ -34,9 +41,11 @@ export default class Paddle {
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
+  //handle the movement on each frame
   update(deltaTime) {
     this.position.x += this.speed;
 
+    //collide with left bo
     if (this.position.x < 0) this.position.x = 0;
 
     if (this.position.x + this.width > this.gameWidth) {

@@ -2,17 +2,20 @@ import Paddle from "/src/paddle";
 import InputHandler from "/src/input";
 import Ball from "./ball";
 
+//fetch the canvas element with id "gameScreen"
 let canvas = document.getElementById("gameScreen");
-
+//method returns a drawing context on the canvas
 let ctx = canvas.getContext("2d");
 
+//Define the game border
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
 //clear previous position of any shape
 //to clear previous actions every frame as the objs move
-ctx.clearRect(0, 0, 800, 600);
+ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
+//instantiate an instance of class Ball
 let ball = new Ball(GAME_WIDTH, GAME_HEIGHT);
 //instantiate an instance of class Paddle
 let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
