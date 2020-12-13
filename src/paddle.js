@@ -3,9 +3,9 @@ export default class Paddle {
   a constructor enables you to provide any custom initialization 
   that must be done before any other methods can be called on an instantiated object.
   */
-  constructor(gameWidth, gameHeight) {
+  constructor(game) {
     //didn't need gameHeight since the paddle only move on the x axis hence would collide with the 'width' border
-    this.gameWidth = gameWidth;
+    this.gameWidth = game.gameWidth;
     //the paddle width
     this.width = 150;
     //the paddle height
@@ -17,8 +17,8 @@ export default class Paddle {
 
     //the initial position of the paddle
     this.position = {
-      x: gameWidth / 2 - this.width / 2,
-      y: gameHeight - this.height - 10
+      x: game.gameWidth / 2 - this.width / 2,
+      y: game.gameHeight - this.height - 10
     };
   }
 
@@ -45,9 +45,9 @@ export default class Paddle {
   update(deltaTime) {
     this.position.x += this.speed;
 
-    //collide with left bo
+    //collide with left border
     if (this.position.x < 0) this.position.x = 0;
-
+    //collide with the left border
     if (this.position.x + this.width > this.gameWidth) {
       this.position.x = this.gameWidth - this.width;
     }
