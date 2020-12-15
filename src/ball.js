@@ -1,11 +1,19 @@
 export default class Ball {
   constructor(game) {
+    //fetch the ball image from HTML file
     this.image = document.getElementById("img_ball");
+    //ball initial position
     this.position = { x: 10, y: 10 };
+    //ball initial speed
     this.speed = { x: 6, y: 2 };
+    //ball size
     this.size = 30;
+    //game can now be used inside any other function
+    this.game = game;
+
+    //read the game width and game height
     this.gameWidth = game.gameWidth;
-    this.gameHight = game.gameHight;
+    this.gameHeight = game.gameHeight;
   }
 
   draw(ctx) {
@@ -19,6 +27,7 @@ export default class Ball {
   }
 
   update(deltaTime) {
+    console.log(this.game.paddle.position.x);
     this.position.x += this.speed.x;
     this.position.y += this.speed.y;
 
@@ -27,7 +36,7 @@ export default class Ball {
       this.speed.x = -this.speed.x;
     }
 
-    if (this.position.y + this.size > this.gameHight || this.position.y < 0) {
+    if (this.position.y + this.size > this.gameHeight || this.position.y < 0) {
       this.speed.y = -this.speed.y;
     }
   }

@@ -1,6 +1,6 @@
 import Paddle from "/src/paddle";
 import InputHandler from "/src/input";
-import Ball from "./ball";
+import Ball from "/src/ball";
 
 export default class Game {
   constructor(gameWidth, gameHeight) {
@@ -23,7 +23,6 @@ export default class Game {
   update(deltaTime) {
     /*
     this.paddle.update(deltaTime);
-
     this.ball.update(deltaTime);
     */
 
@@ -33,7 +32,6 @@ export default class Game {
   draw(ctx) {
     /*
     this.paddle.draw(ctx);
-
     this.ball.draw(ctx);
     */
 
