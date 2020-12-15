@@ -1,6 +1,7 @@
 import Paddle from "/src/paddle";
 import InputHandler from "/src/input";
 import Ball from "/src/ball";
+import Brick from "/src/brick";
 
 export default class Game {
   constructor(gameWidth, gameHeight) {
@@ -14,7 +15,15 @@ export default class Game {
     //instantiate an instance of class Paddle
     this.paddle = new Paddle(this);
 
-    this.gameObjects = [this.ball, this.paddle];
+    let brick = new Brick(this, { x: 20, y: 20 });
+    /*
+    let bricks = [];
+    for (let i = 0; i < 10; i++) {
+      bricks.push(new Brick(this, { x: i * 52, y: 30 }));
+    }
+    */
+
+    this.gameObjects = [this.ball, this.paddle, brick];
 
     //instantiate the InputHandler
     new InputHandler(this.paddle);
@@ -34,7 +43,6 @@ export default class Game {
     this.paddle.draw(ctx);
     this.ball.draw(ctx);
     */
-
     this.gameObjects.forEach((object) => object.draw(ctx));
   }
 }
