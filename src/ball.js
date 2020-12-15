@@ -27,7 +27,7 @@ export default class Ball {
   }
 
   update(deltaTime) {
-    console.log(this.game.paddle.position.x);
+    //console.log(this.game.paddle.position.x);
     this.position.x += this.speed.x;
     this.position.y += this.speed.y;
 
@@ -38,6 +38,31 @@ export default class Ball {
 
     if (this.position.y + this.size > this.gameHeight || this.position.y < 0) {
       this.speed.y = -this.speed.y;
+    }
+
+    //collision would be with the bottom of the ball
+    let bottomOfBall = this.position.y + this.size;
+    //collision would be with the top of the paddle
+    let topOfPaddle = this.game.paddle.position.y;
+    //since the position.x indicates the first pixel of the paddle on the x axis
+    let leftSideOfPaddle = this.game.paddle.position.x;
+    //position.x + paddle.width would get the end pixel of the paddle
+    let rightSideOfPaddle =
+      this.game.paddle.position.x + this.game.paddle.width;
+
+    //collision between ball and paddle check
+    //cond1 => check if bottomOfBall reached the topOfPaddle height
+    //cond2 && cond3 => check if the ball touches the paddle between
+    //its first pixel and its last pixel (touches the paddle itself)
+    if (
+      bottomOfBall >= topOfPaddle &&
+      this.position.x >= leftSideOfPaddle &&
+      this.position.x + this.size <= rightSideOfPaddle
+    ) {
+      //reverse the direction
+      this.speed.y = -this.speed.y;
+      //allow the ball to touch the paddle as its end point
+      this.position.y = this.game.paddle.position.y - this.size;
     }
   }
 }
